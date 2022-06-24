@@ -1,6 +1,6 @@
 ---
 name: Mẫu phiếu yêu cầu
-about: Suggest an idea for this project
+about: Yêu cầu thực hiện mới
 title: ''
 labels: Yêu cầu mới (enhancement)
 assignees: ''
