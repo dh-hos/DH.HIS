@@ -26,9 +26,19 @@ app.post('/files', (req, res) => {
     else if(a == 0){
         // get token
         var url = 'https://rms.efy.com.vn/clients/login';
+        var agreementUUID = '5fce09a2-2b84-4f48-83ac-fdb8bac023c3';
+        var authorizeCode = '221105';
         savefile.getTokenEfy(url,'rp_test','rp_test','RP_TEST',function(response){
-          console.log(response);
+          var token = response;
+          //lay base64 file ky so
+          var database64 = savefile.EncodePDF('test.pdf');
+          savefile.getPDF_CKS(token, database64,agreementUUID,authorizeCode,function(response){
+            var signedFileData = response;
+            savefile.DecodePDF(signedFileData, 'C:/Users/Gibiop/Desktop/demo12daky.pdf');
+
+          });
         })
+        
 
     }else{
         console.log('Error: ' + savefile.file('test.pdf'));
