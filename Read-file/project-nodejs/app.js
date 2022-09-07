@@ -35,6 +35,7 @@ app.post('/files', (req, res) => {
           savefile.getPDF_CKS(token, database64,agreementUUID,authorizeCode,function(response){
             var signedFileData = response;
             savefile.DecodePDF(signedFileData, 'C:/Users/Gibiop/Desktop/demo12daky.pdf');
+            console.log('complete');
 
           });
         })

@@ -75,12 +75,12 @@ function getTokenEfy(path,username, password, rpCode,callback){
 function getPDF_CKS(token,database64,agreementUUID,authorizeCode,callback){
     var axios = require('axios');
     var data = JSON.stringify({
-  "agreementUUID": agreementUUID,
-  "authMode": "EXPLICIT/PIN",
-  "authorizeCode": authorizeCode,
-  "mimeType": "application/pdf",
-  "signingFileData": database64,
-  "signCloudMetaData": {
+    "agreementUUID": agreementUUID,
+    "authMode": "EXPLICIT/PIN",
+    "authorizeCode": authorizeCode,
+    "mimeType": "application/pdf",
+    "signingFileData": database64,
+    "signCloudMetaData": {
     "singletonSigning": {
       "entry": [
         {
@@ -156,6 +156,7 @@ function ReadFile(filename){
             console.log(data);
     })
 }
+
 module.exports.getPDF_CKS = getPDF_CKS;
 
 module.exports.EncodePDF = EncodePDF;
