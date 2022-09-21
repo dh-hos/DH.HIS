@@ -1,5 +1,7 @@
 const bodyParser = require('body-parser') 
 
+const con_pg = require('./pg_connect')
+
 const express = require('express')
 const fs = require('fs');
 const path = require('path');
@@ -46,6 +48,36 @@ app.post('/files', (req, res) => {
     }
     //savefile.DecodePDF(req.body.base64data, 'C:/Users/Gibiop/Desktop/demo12.pdf');
 })
+
+//connect pg
+_host = "localhost";
+_user = "postgres";
+_port = 5432;
+_password = "postgres";
+_database = "apireg";
+con_pg.Connect_pg(_host, _user, _port, _password, _database);
+
+//----insert
+sql = "INSERT INTO dh.dmusers(taikhoan,hoten) VALUES('033444555','Nguyen Van A')";
+//con_pg.Insert(sql);
+
+
+//----select
+sql = "SELECT * FROM dh.dmusers";
+//con_pg.Select(sql);
+
+
+//----delete
+sql = "DELETE FROM dh.dmusers WHERE taikhoan = '033444555'";
+//con_pg.Delete(sql);
+
+
+//----update
+sql = "UPDATE dh.dmusers SET hoten = 'NGUYEN VAN AAA' WHERE taikhoan = '033444555'"
+//con_pg.Update(sql);
+
+
+
 
 
 app.listen(port, () => {
