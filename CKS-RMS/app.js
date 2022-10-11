@@ -9,7 +9,7 @@ const fc = require('./functions');
 const app = express();
 const port = 3000;
 
-var tk = "";
+var token = "";
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
@@ -34,33 +34,19 @@ app.post('/kyso', async (req, res) => {
     var path_fileky = req.body.path_fileky;
     var path_luufile = req.body.path_luufile;
 
-    //var token = await fc.getToken(url_gettoken,username,password);
-    //console.log(token.id_token);
+    token = await fc.getToken(url_gettoken,username,password);
+    var image64 = await fc.getChuKy(url_getchuky, token.id_token, serial, pin);
+
+    var database64 = fc.EncodePDF(path_fileky);
+
+    var database64_filedaky = await fc.getPDF_CKS(url_kyso, token.id_token, database64, documentName, X, Y, width, height, pageNum, image64.data, pin, serial);
     
-    //lay token                                                     
-    fc.getToken(url_gettoken,username,password,function(response){
-        var token = response;
-
-        //lay chu ky
-        fc.getChuKy(url_getchuky, token, serial, pin, function(response){
-            var imagebase64 = response;
-
-            //lay file ky dạng base64;
-            var database64 = fc.EncodePDF(path_fileky);
-
-            //tien hanh ky so
-            fc.getPDF_CKS(url_kyso, token, database64, documentName, X, Y, width, height, pageNum, imagebase64, pin, serial, function(response){
-             var data = response;
-             fc.DecodePDF(data, path_luufile);
-             res.send(JSON.stringify({
-                success:true,
-                database64:data
-             }))
-             console.log('complete');
-
-           });
-        })
-    })
+    fc.DecodePDF(database64_filedaky.data, path_luufile);
+    res.send(JSON.stringify({
+       success:true,
+       database64:database64_filedaky.data
+    }))
+    console.log('complete');      
 })
 
 

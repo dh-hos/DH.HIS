@@ -22,7 +22,7 @@ function DecodePDF(enc, path){
     let decodedBase64 = base64.base64Decode(enc, path);
 }
 
-function getToken(url,username, password,callback){
+async function getToken(url,username, password){
         var axios = require('axios');
         var data = JSON.stringify({
                 "username":username,
@@ -39,19 +39,11 @@ function getToken(url,username, password,callback){
             data : data
         };
     
-        axios(config)
-        .then(function (response) {
-            token = response.data.id_token;
-            callback(token);
-
-            //WriteFile('token.txt',token);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        return axios(config).then(res=>res.data);
+        
 }
 
-function getPDF_CKS(url, token, pdfbase64, documentName, X, Y, width, height, pageNum, image64, pin, serial, callback){
+async function getPDF_CKS(url, token, pdfbase64, documentName, X, Y, width, height, pageNum, image64, pin, serial){
     var axios = require('axios');
     var data = JSON.stringify({
             "signingRequestContents": [
@@ -89,36 +81,26 @@ function getPDF_CKS(url, token, pdfbase64, documentName, X, Y, width, height, pa
                 data : data
             };
 
-        axios(config)
-        .then(function (response) {
-            var image64 = response.data.data;
-            callback(image64);
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
+        return axios(config).then(res=>res.data);
+       
 
 }
    
-function getChuKy(url, token, serial, pin, callback){
+async function getChuKy(url, token, serial, pin){
     var axios = require('axios');
+    var data = JSON.stringify({});
 
     var config = {
     method: 'get',
     url: url+'?serial='+serial+'&pin='+pin,
     headers: { 
         'Authorization': 'Bearer '+token,
-    }
+    },
+    data : data
     };
 
-    axios(config)
-    .then(function (response) {
-        var image64 = response.data.data;
-        callback(image64);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+    return axios(config).then(res=>res.data);
+   
 }
 
 module.exports.getPDF_CKS = getPDF_CKS;
