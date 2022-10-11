@@ -25,8 +25,8 @@ function DecodePDF(enc, path){
 function getToken(url,username, password,callback){
         var axios = require('axios');
         var data = JSON.stringify({
-                "username":"login_demo",
-                "password":"login_demo",
+                "username":username,
+                "password":password,
                 "rememberMe":"false"
             });
     
@@ -81,22 +81,22 @@ function getPDF_CKS(url, token, pdfbase64, documentName, X, Y, width, height, pa
 
             var config = {
             method: 'post',
-            url: 'http://demosign.easyca.vn:8080/api/sign/pdf',
+            url: url,
             headers: { 
-                'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsb2dpbl9kZW1vIiwiYXV0aCI6IlJPTEVfQURNSU4sUk9MRV9TSUdOLFJPTEVfU1VQRVJfVVNFUixST0xFX1VTRVIsUk9MRV9WRVJJRlkiLCJleHAiOjE2NjU1NTk5NDZ9.ZbGmwpjkmfF6EfbuRg300Znv4A1mS5G3GSBuc7se0tvFogbMTckmK6T6V2549AZTdra9Ca9liflDMNv7YQMkpw', 
+                'Authorization': 'Bearer '+token, 
                 'Content-Type': 'application/json'
             },
                 data : data
             };
 
-            axios(config)
-            .then(function (response) {
-                var image64 = response.data.data;
-                callback(image64);
-            })
-            .catch(function (error) {
-            console.log(error);
-            });
+        axios(config)
+        .then(function (response) {
+            var image64 = response.data.data;
+            callback(image64);
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
 
 }
    

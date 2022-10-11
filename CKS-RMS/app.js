@@ -34,10 +34,10 @@ app.post('/kyso', async (req, res) => {
     var path_fileky = req.body.path_fileky;
     var path_luufile = req.body.path_luufile;
 
-    // var token = await fc.getToken(url_gettoken,username,password);
-    // console.log(token.id_token);
+    //var token = await fc.getToken(url_gettoken,username,password);
+    //console.log(token.id_token);
     
-    //lay token
+    //lay token                                                     
     fc.getToken(url_gettoken,username,password,function(response){
         var token = response;
 
