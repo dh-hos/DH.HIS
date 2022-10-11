@@ -7,6 +7,7 @@ const path = require('path');
 const base64 = require('base64topdf');
 const { url } = require('inspector');
 app.use(express.json()); 
+var axios = require('axios');
 var token = '';
 
 
@@ -22,8 +23,8 @@ function DecodePDF(enc, path){
     let decodedBase64 = base64.base64Decode(enc, path);
 }
 
-function getToken(url,username, password,callback){
-        var axios = require('axios');
+async function getToken(url,username, password){
+        
         var data = JSON.stringify({
                 "username":"login_demo",
                 "password":"login_demo",
@@ -39,16 +40,8 @@ function getToken(url,username, password,callback){
             data : data
         };
     
-        axios(config)
-        .then(function (response) {
-            token = response.data.id_token;
-            callback(token);
-
-            //WriteFile('token.txt',token);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        return axios(config).data;
+        
 }
 
 function getPDF_CKS(url, token, pdfbase64, documentName, X, Y, width, height, pageNum, image64, pin, serial, callback){

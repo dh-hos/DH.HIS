@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 app.use(express.json());  
 
 
-app.post('/gettoken', (req, res) => {
+app.post('/gettoken', async (req, res) => {
     var username = 'login_demo';
     var password = 'login_demo';
 
@@ -33,32 +33,31 @@ app.post('/gettoken', (req, res) => {
     var height = 98;
     var pageNum = 1;
 
-    // fc.getToken(url_gettoken,username,password,function(response){
-    //   tk = response;
-    // })
-
-    // console.log(tk);
+    var token = await fc.getToken(url_gettoken,username,password);
+    console.log(token);
+    //console.log(token.id_token);
+   
     
     //lay token
-    fc.getToken(url_gettoken,username,password,function(response){
-        var token = response;
+    // fc.getToken(url_gettoken,username,password,function(response){
+    //     var token = response;
 
-        //lay chu ky
-        fc.getChuKy(url_getchuky, token, serial, pin, function(response){
-            var imagebase64 = response;
+    //     //lay chu ky
+    //     fc.getChuKy(url_getchuky, token, serial, pin, function(response){
+    //         var imagebase64 = response;
 
-            //lay file ky dạng base64;
-            var database64 = fc.EncodePDF('fileky.pdf');
+    //         //lay file ky dạng base64;
+    //         var database64 = fc.EncodePDF('fileky.pdf');
 
-            //tien hanh ky so
-            fc.getPDF_CKS(url_kyso, token, database64, documentName, X, Y, width, height, pageNum, imagebase64, pin, serial, function(response){
-             var data = response;
-             fc.DecodePDF(data, 'C:/Users/Gibiop/Desktop/filedaky_demo.pdf');
-             console.log('complete');
+    //         //tien hanh ky so
+    //         fc.getPDF_CKS(url_kyso, token, database64, documentName, X, Y, width, height, pageNum, imagebase64, pin, serial, function(response){
+    //          var data = response;
+    //          fc.DecodePDF(data, 'C:/Users/Gibiop/Desktop/filedaky_demo.pdf');
+    //          console.log('complete');
 
-           });
-        })
-    })
+    //        });
+    //     })
+    // })
 })
 
 
