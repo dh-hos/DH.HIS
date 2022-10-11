@@ -55,6 +55,7 @@ _user = "postgres";
 _port = 5432;
 _password = "postgres";
 _database = "apireg";
+
 con_pg.Connect_pg(_host, _user, _port, _password, _database);
 
 //----insert
