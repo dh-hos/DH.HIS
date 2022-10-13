@@ -8,22 +8,22 @@ const base64 = require('base64topdf');
 const { url } = require('inspector');
 app.use(express.json()); 
 var token = '';
+var axios = require('axios');
 
 
+//-----------------------------Softdream-----------------------------------//
 //ma hoa PDF -> base64
 function EncodePDF(path){
     let encodedPdf = base64.base64Encode(path);
     return encodedPdf;
 }
 
-
 // base64 -> PDF
 function DecodePDF(enc, path){
     let decodedBase64 = base64.base64Decode(enc, path);
 }
 
-async function getToken(url,username, password){
-        var axios = require('axios');
+async function getToken_softdream(url,username, password){
         var data = JSON.stringify({
                 "username":username,
                 "password":password,
@@ -43,8 +43,7 @@ async function getToken(url,username, password){
         
 }
 
-async function getPDF_CKS(url, token, pdfbase64, documentName, X, Y, width, height, pageNum, image64, pin, serial){
-    var axios = require('axios');
+async function getPDF_CKS_softdream(url, token, pdfbase64, documentName, X, Y, width, height, pageNum, image64, pin, serial){
     var data = JSON.stringify({
             "signingRequestContents": [
             {
@@ -86,8 +85,7 @@ async function getPDF_CKS(url, token, pdfbase64, documentName, X, Y, width, heig
 
 }
    
-async function getChuKy(url, token, serial, pin){
-    var axios = require('axios');
+async function getChuKy_softdream(url, token, serial, pin){
     var data = JSON.stringify({});
 
     var config = {
@@ -103,12 +101,147 @@ async function getChuKy(url, token, serial, pin){
    
 }
 
-module.exports.getPDF_CKS = getPDF_CKS;
+
+//-------------------------------------Viettel-------------------------------------//
+
+async function getToken_viettel(url, client_id, user_id, client_secret, profile_id){
+
+    var data = JSON.stringify({
+        "client_id": "samples_test_client",
+        "user_id": "CMT_0123456789",
+        "client_secret": "205640fd6ea8c7d80bb91c630b52d286d21ee511",
+        "profile_id": "adss:ras:profile:001"
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://remotesigning.viettel.vn/adss/service/ras/v1/login',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      return axios(config).then(res=>res.data.access_token);
+}
+
+async function getCredentials_list_viettel(url, token, user_id){
+    var data = JSON.stringify({
+        "userID": user_id
+      });
+      
+      var config = {
+        method: 'post',
+        url: url,
+        headers: { 
+          'Authorization': 'Bearer '+token, 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      return axios(config).then(res=>res.data.credentialIDs);
+}
+
+async function getCredentials_info_viettel(url, token, credentialID){
+    var data = JSON.stringify({
+        "credentialID": credentialID,
+        "certificates": "chain",
+        "certInfo": true,
+        "authInfo": true
+      });
+      
+      var config = {
+        method: 'post',
+        url: url,
+        headers: { 
+          'Authorization': 'Bearer '+token, 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      return axios(config).then(res=>res.data.cert);
+      
+}
+
+async function getSAD_viettel(url, token, credentialID, pageNum, documentName, docummentId, database64){
+    var data = JSON.stringify({
+        "credentialID": credentialID,
+        "numSignatures": pageNum,
+        "documents": [
+          {
+            "document_id": docummentId,
+            "document_name": documentName
+          }
+        ],
+        "hash": [
+          database64
+        ]
+      });
+      
+      var config = {
+        method: 'post',
+        url: url,
+        headers: { 
+          'Authorization': 'Bearer '+token, 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      return axios(config).then(res=>res.data.SAD);
+      
+}
+
+async function getSighHast_viettel(url, token, credentialID, SAD, documentName, documentId, database64){
+    var data = JSON.stringify({
+        "credentialID": credentialID,
+        "SAD": SAD,
+        "documents": [
+          {
+            "document_id": documentId,
+            "document_name": documentName
+          }
+        ],
+        "hash": [
+          database64
+        ],
+        "hashAlgo": "2.16.840.1.101.3.4.2.1",
+        "signAlgo": "1.2.840.113549.1.1.1"
+      });
+      
+      var config = {
+        method: 'post',
+        url: url,
+        headers: { 
+          'Authorization': 'Bearer '+token, 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      return axios(config).then(res=>res.data.signatures);
+    
+}
+
+
+module.exports.getPDF_CKS_softdream  = getPDF_CKS_softdream;
 
 module.exports.EncodePDF = EncodePDF;
 
 module.exports.DecodePDF = DecodePDF;
 
-module.exports.getChuKy = getChuKy;
+module.exports.getChuKy_softdream  = getChuKy_softdream;
 
-module.exports.getToken = getToken;
+module.exports.getToken_softdream  = getToken_softdream;
+
+module.exports.getToken_viettel = getToken_viettel;
+
+module.exports.getCredentials_list_viettel = getCredentials_list_viettel;
+
+module.exports.getCredentials_info_viettel = getCredentials_info_viettel;
+
+module.exports.getSAD_viettel = getSAD_viettel;
+
+module.exports.getSighHast_viettel = getSighHast_viettel;
