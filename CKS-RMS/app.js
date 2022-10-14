@@ -32,15 +32,15 @@ app.post('/kyso/softdream', async (req, res) => {
     var width = req.body.width;
     var height = req.body.height;
     var pageNum = req.body.pageNum;
-    var database64 = req.body.database64;
-    var path_luufile = req.body.path_luufile;
+    var filebase64 = req.body.filebase64;
+    //var path_luufile = req.body.path_luufile;
 
     token = await fc.getToken_softdream(url_gettoken,username,password);
     var image64 = await fc.getChuKy_softdream(url_getchuky, token.id_token, serial, pin);
 
-    var database64_filedaky = await fc.getPDF_CKS_softdream(url_kyso, token.id_token, database64, documentName, X, Y, width, height, pageNum, image64.data, pin, serial);
+    var database64_filedaky = await fc.getPDF_CKS_softdream(url_kyso, token.id_token, filebase64, documentName, X, Y, width, height, pageNum, image64.data, pin, serial);
     
-    fc.DecodePDF(database64_filedaky.data, path_luufile);
+    //fc.DecodePDF(database64_filedaky.data, path_luufile);
     res.send(JSON.stringify({
        success:true,
        database64:database64_filedaky.data
@@ -63,7 +63,7 @@ app.post('/kyso/viettel', async(req, res) => {
     var pageNum = req.body.pageNum;
     var documentName = req.body.documentName;
     var documentId = req.body.documentId;
-    var database64 = req.body.database64;
+    var database64 = req.body.filebase64;
 
     token = await fc.getToken_viettel(url_gettoken, client_id, user_id, client_secret, profile_id);
 
@@ -81,6 +81,15 @@ app.post('/kyso/viettel', async(req, res) => {
       cert:cert
     }))
     console.log('complete');   
+})
+
+
+app.get('/demo', async(req, res) => {
+  res.send(JSON.stringify({
+    success:true,
+    text:'hello'
+ }))
+ console.log('complete');    
 })
 
 
