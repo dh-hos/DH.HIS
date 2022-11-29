@@ -9,6 +9,8 @@ const { url } = require('inspector');
 app.use(express.json()); 
 var token = '';
 var axios = require('axios');
+const pdf = require('pdf-page-counter');
+const { json } = require('express');
 
 
 //-----------------------------Softdream-----------------------------------//
@@ -22,6 +24,7 @@ function EncodePDF(path){
 function DecodePDF(enc, path){
     let decodedBase64 = base64.base64Decode(enc, path);
 }
+
 
 async function getToken_softdream(url,username, password){
         var data = JSON.stringify({
@@ -107,10 +110,10 @@ async function getChuKy_softdream(url, token, serial, pin){
 async function getToken_viettel(url, client_id, user_id, client_secret, profile_id){
 
     var data = JSON.stringify({
-        "client_id": "samples_test_client",
-        "user_id": "CMT_0123456789",
-        "client_secret": "205640fd6ea8c7d80bb91c630b52d286d21ee511",
-        "profile_id": "adss:ras:profile:001"
+        "client_id": client_id,
+        "user_id": user_id,
+        "client_secret": client_secret,
+        "profile_id": profile_id
       });
       
       var config = {
@@ -225,6 +228,29 @@ async function getSighHast_viettel(url, token, credentialID, SAD, documentName, 
     
 }
 
+async function getNumpagePDF(filebase64){
+  let dataBuffer = new Buffer.from(filebase64, 'base64');
+     return (await pdf(dataBuffer)).numpages;
+}
+
+async function createNewFile(obj,filename){
+  const fd = fs.openSync(filename,'w');
+
+  const jsonString = JSON.stringify(obj);
+  fs.writeFile(filename, jsonString, 'utf-8', (err, data) => {
+    if(err) throw err;
+  })
+
+}
+
+async function readFile(filename) {
+  const fsPromises = require('fs').promises;
+  const data = await fsPromises.readFile(filename)
+                     .catch((err) => console.error('Failed to read file', err));
+
+  return JSON.parse(data.toString());
+}
+
 
 module.exports.getPDF_CKS_softdream  = getPDF_CKS_softdream;
 
@@ -245,3 +271,9 @@ module.exports.getCredentials_info_viettel = getCredentials_info_viettel;
 module.exports.getSAD_viettel = getSAD_viettel;
 
 module.exports.getSighHast_viettel = getSighHast_viettel;
+
+module.exports.getNumpagePDF = getNumpagePDF;
+
+module.exports.createNewFile = createNewFile;
+
+module.exports.readFile = readFile;

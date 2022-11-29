@@ -10,3 +10,15 @@
 2022-10-13 16:33:32 - Started 6284
 2022-10-13 21:22:28 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2022-10-13 21:22:28 - Started 6500
+2022-10-21 08:13:02 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-10-21 08:13:03 - Started 6900
+2022-10-24 12:30:40 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-10-24 12:30:40 - Started 6340
+2022-11-04 16:29:47 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-11-04 16:29:47 - Started 6488
+2022-11-07 07:38:06 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-11-07 07:38:06 - Started 6652
+2022-11-14 16:33:19 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-11-14 16:33:19 - Started 6364
+2022-11-15 07:39:59 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-11-15 07:39:59 - Started 6516
