@@ -22,3 +22,5 @@
 2022-11-14 16:33:19 - Started 6364
 2022-11-15 07:39:59 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2022-11-15 07:39:59 - Started 6516
+2022-11-29 09:58:34 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\DataDH\CodeNodejs\DH.HIS\CKS-RMS\node_modules\node-windows\lib\wrapper.js --file D:\DataDH\CodeNodejs\DH.HIS\CKS-RMSapp.js --scriptoptions= --log "nodeBasicServer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-11-29 09:58:34 - Started 6784

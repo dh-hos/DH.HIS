@@ -1,0 +1,9 @@
+<service>
+  <id>webservice-chukydientu</id>
+  <name>webservice-chukydientu</name>
+  <description>webservice call api cts</description>
+  <env name="JENKINS_HOME" value="%BASE%"/>
+  <executable>nodejs</executable>
+  <arguments>-Xrs -Xmx256m -jar "%BASE%\jenkins.war" --httpPort=8080</arguments>
+  <log mode="roll"></log>
+</service>
